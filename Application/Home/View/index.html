@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>微采360</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/app.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/global.css">
+	<link rel="stylesheet" type="text/css" href="http://libs.useso.com/js/font-awesome/4.2.0/css/font-awesome.min.css">
+</head>
+<style>
+	.text-green{color:#44b549;}
+	h1{font-size: 90px}
+	html,body{
+		background:#fff;
+	}
+</style>
+<body>
+	<div class='w-1000 m-t-lg'>
+		<div class='row m-b-md text-left'>
+			<div class='col-md-12'  style="margin-top:200px">
+				<h1 class= "text-darkblack text-center text-green m-b-lg" >微采360 </h1>
+                <!-- 普通输入框 -->
+                <form action="/home/fast/fastsave" class='m-t-md rl' method='POST' id='fastform'>
+					<div class="input-group input-group-lg">
+                        <input type="text" class="form-control rounded" placeholder="请输入搜索内容">
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn b-a rounded no-shadow btn-success">
+                                搜索
+                            </button>
+                        </span>
+                    </div>
+				</form>
+			</div>			
+		</div>
+	</div>
+</body>
+</html> 
