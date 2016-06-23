@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cn">
 <head>
 	<meta charset="UTF-8">
 	<title>微采360</title>
@@ -10,20 +10,43 @@
 </head>
 <style>
 	.text-green{color:#44b549;}
-	h1{font-size: 90px}
+	h1{font-size: 80px}
 	html,body{
 		background:#fff;
+	}
+	.col-md-3{width:25%!important;}
+	.col-md-9{width:75%!important;}
+	.fl{float:left}
+	select {
+		border:none;
+	}
+	.indexform{
+		border:1px solid #ccc;
+		border-radius:5px;
+	}
+	#search_type{
+		border:none;
+	}
+	.indexinput{
+		border:none;
+		border-left:1px solid #ccc;
 	}
 </style>
 <body>
 	<div class='w-1000 m-t-lg'>
 		<div class='row m-b-md text-left'>
-			<div class='col-md-12'  style="margin-top:200px">
+			<div class='col-md-8 col-md-offset-2'  style="margin-top:100px">
 				<h1 class= "text-darkblack text-center text-green m-b-lg" >微采360 </h1>
                 <!-- 普通输入框 -->
-                <form action="/home/fast/fastsave" class='m-t-md rl' method='POST' id='fastform'>
+                <form action="/home/search" class='m-t-md rl indexform' method='POST' id='fastform'>
 					<div class="input-group input-group-lg">
-                        <input type="text" class="form-control rounded" placeholder="请输入搜索内容">
+						<select name="search_type" id="search_type" class="col-md-3 form-control ">
+							<option value="1">物品编号</option>
+							<option value="2">名称</option>
+							<option value="3">供应商</option>
+							<option value="4">备注</option>
+						</select>
+                        <input type="text" class="col-md-9 form-control rounded indexinput " placeholder="请输入搜索内容" name="content">
                         <span class="input-group-btn">
                             <button type="submit" class="btn b-a rounded no-shadow btn-success">
                                 搜索

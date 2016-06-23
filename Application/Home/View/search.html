@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>微采360|“{$content}”的搜索结果</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/app.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/global.css">
+	<link rel="stylesheet" type="text/css" href="http://libs.useso.com/js/font-awesome/4.2.0/css/font-awesome.min.css">
+	<script src='//cdn.bootcss.com/jquery/3.0.0/jquery.min.js'></script>
+	<script>
+		var data=<?php echo json_encode($data);?>;
+		$(function(){
+			$('.shopping').click(function(){
+				var dataid=$(this).attr('data-shopid');
+				var shopdata=data[dataid-1];
+				$.post('/home/shopping/in',{data:shopdata},function(ret){
+					if(ret.status==1){
+						alert(ret.info);
+					}else{
+						alert(ret.info);
+					}
+				},'json');
+			});
+		});
+	</script>
+</head>
+<style>
+	html,body{background:#f0f0f0}
+</style>
+<body>
+	<include file="./include-head" />
+	<div class='w-1000 white p-b-md' style="margin-top:4rem">
+		<div class='row m-b-md text-left'>
+			<div class='col-md-12 m-t-lg'>
+				<ul class="list m-x-md m-y-0 box" style="border:1px solid rgba(120,130,140,.13)">
+					<volist name="data" id='data' offset='0'>
+					<li class="list-item p-y-md p-x white b-b-light">
+						<div class="row row-col no-gutter">
+							<div class="col-md-7">
+								<div class="row-col">
+									<div class="row-cell m-r text-center w-128 type-icon-wrap" data-type-icon-wrap="">
+										<if condition='$data["img"] neq ""'>
+											<img src="{$data.img}" alt="" style="width:128px">
+										<else />
+											<img src="/static/images/nopic.jpg" alt="" style="width:128px">
+										</if>
+									</div>
+									<div class="row-cell">
+										<div class="m-l-sm">
+											<div class="desc-wrap pos-rlt clear">
+												<span class="pointer text-ellipsis pull-left" data-note="">{$data.proname}</span>
+												<input type="text" class="form-control form-control-sm w hide pull-left" value="" placeholder="" data-note-input="">
+												<i class="clicon-edit text-xs m-l-xs pointer pull-left" data-note-rename=""></i>
+											</div>
+											<div class="text-grey text-xs m-b-sm">
+												<span class="m-r">物品编号：{$data.code}</span>
+												<span class="m-r" data-add-time="">生产周期：{$data.date}</span>
+												<span class="m-r-xs">货架号：{$data.shelf}</span>
+												<span>供应商：{$data.supplier}</span>
+											</div>
+											<div class="text-grey text-xs m-b-sm">
+												<span class="m-r">库存：{$data.stock}</span>
+											</div>
+											<div class="text-darkgrey text-xs text-ellipsis" data-text="">产品参数:{$data.note}</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-5 row-cell v-m">
+								<div class="list-btn">
+									<div class="btn-group btn-group-sm pull-right">
+											<if condition="($user['role'] eq 1) OR ($user['role'] eq 2)">
+												<a class="btn white" href="/log/buy/{$data['id']}">历史采购价格</a>
+											</if>
+											<if condition="($user['role'] eq 1) OR ($user['role'] eq 3)">
+												<a class="btn white" href="/log/sale/{$data['id']}">历史零售价格</a>
+											</if>
+											<button class="btn white shopping" data-shopid="{$i}">加入购物车</button>
+											<if condition="($user['role'] eq 1) OR ($user['role'] eq 2)">
+												<a class="btn white"  href="/home/edit/{$data['id']}">编辑</a>
+											</if>
+										<div class="btn-group btn-group-sm dropdown">
+											<button class="btn white fa fa-ellipsis-v" data-toggle="dropdown"></button>
+											<div class="dropdown-menu pull-right">
+												<button class="dropdown-item" data-count="" onclick="new_window = window.open()" target="_blank">统计</button>
+												<button class="dropdown-item" data-delete="" data-toggle="modal" data-target="#modal-delete">删除</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					</volist>
+				</ul>
+			</div>			
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+	<style>
+		.col-md-4{width:30%!important;}
+		.col-md-8{width:70%!important;}
+		#search_type{
+			border:none;
+			height:30px;
+			margin-top:1px;
+		}
+		.indexinput{
+			border:none;
+			border-left:1px solid #ccc;
+		}
+		.indexform{
+			border:1px solid #ccc;
+			border-radius:5px;
+		}
+	</style>
+	<div class="app-header white box-shadow" style="top:0px">
+        <div class="navbar">
+        	<ul class="nav navbar-nav pull-right">
+        		<li class="nav-item dropdown pos-stc-xs"></li>
+        		<li class="nav-item dropdown">
+        			<a class="nav-link clear" href="" data-toggle="dropdown">
+        				<span class="avatar w-32">
+        					<img src="http://flatfull.com/themes/flatkit/assets/images/a0.jpg" alt="..."> 
+        					<i class="on b-white bottom"></i>
+        				</span>
+        			</a>
+        		</li>
+        	</ul>
+			<div class="collapse navbar-toggleable-sm" id="collapse">
+				<form class="navbar-form form-inline pull-right pull-none-sm navbar-item v-m" role="search" method='POST' action="/home/search" >
+					<div class="form-group l-h m-a-0">
+						<div class="input-group input-group-sm indexform">
+							<select name="search_type" id="search_type" class="col-md-4 form-control ">
+								<option value="1">物品编号</option>
+								<option value="2">名称</option>
+								<option value="3">供应商</option>
+								<option value="4">备注</option>
+								</select>
+							<input type="text" class="form-control p-x b-a rounded col-md-8 indexinput" placeholder="Search projects..." name="content" value="{$content}"> 
+							<span class="input-group-btn">
+								<button type="submit" class="btn white b-a rounded no-shadow">
+									<i class="fa fa-search"></i>
+								</button>
+							</span>
+						</div>
+					</div>
+				</form>
+				<ul class="nav navbar-nav">
+					<li class="nav-item dropdown">
+						<a class="nav-link" href="" data-toggle="dropdown">
+							<span>微采360</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+        </div>
+    </div>

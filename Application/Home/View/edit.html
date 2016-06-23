@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>微采360|编辑</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/app.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/global.css">
+	<link rel="stylesheet" type="text/css" href="http://libs.useso.com/js/font-awesome/4.2.0/css/font-awesome.min.css">
+</head>
+<style>
+	html,body{background:#f0f0f0}
+</style>
+<body>
+	<include file="./include-head" />
+	<div class='w-1000 white p-b-md' style="margin-top:4rem!important">
+		<div class='row m-b-md text-left'>
+			<div class='col-md-12 m-t-lg'>
+				<div style='clear:both'></div>
+				<div class=" light lt bg-auto">
+				    <div class="tab-content pos-rlt">
+				      	<div class="tab-pane active" id="tab-1">
+					        <!-- <div class="p-a-md dker _600">椅子</div> -->
+					        <form role="form" class="p-a-md col-md-6" method="POST" action='/home/edit/save'>
+					          <div class="form-group">
+					            <label>图片</label>
+					            <div class="form-file">
+					              <input type="file" class="has-value" name="img" value="{$row['img']}">
+					              <input type="hidden" name="img" value="{$row['img']}">
+					              <button class="btn white">更新图片</button>
+					            </div>
+					          </div>
+					          <div class="form-group">
+					            <label>物品编号</label>
+					            <input type="text" class="form-control" value='{$row["code"]}' disabled="disabled">
+					            <input type="hidden" name="code" value="{$row['code']}">
+					          </div>
+					          <div class="form-group">
+					            <label>物品名称</label>
+					            <input type="text" class="form-control" value='{$row["proname"]}' name="proname">
+					          </div>
+					          <div class="form-group">
+					            <label>生产周期</label>
+					            <input type="text" class="form-control" value="{$row['date']}" name="date">
+					          </div>
+					          <div class="form-group">
+					            <label>货架号</label>
+					            <input type="text" class="form-control" value="{$row['shelf']}" name="shelf">
+					          </div>
+					          <div class="form-group">
+					            <label>供应商</label>
+					            <input type="text" class="form-control" value="{$row['supplier']}" name="supplier">
+					          </div>
+					          <div class="form-group">
+					            <label>库存</label>
+					            <input type="text" class="form-control" value="{$row['stock']}" name="stock">
+					          </div>
+<!-- 					          <div class="checkbox">
+					            <label class="ui-check">
+					              <input type="checkbox"><i class="dark-white"></i> Available for hire
+					            </label>
+					          </div> -->
+					          <label>产品参数</label>
+					          <textarea class="form-control" rows="6" placeholder="hmm.." value="{$row['note']}" name="note">{$row['note']}</textarea>
+					          <button type="submit" class="btn btn-info m-t">更新信息</button>
+					        </form>
+					        <div class="col-md-6 offset-md-6">
+					        	<img src="{$row['img']}" alt="" style="width:100%">
+					        </div>
+				      	</div>
+				 	 </div>
+				</div>
+			</div>			
+		</div>
+	</div>
+</body>
+</html>

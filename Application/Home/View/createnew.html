@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>微采360|用户中心</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/app.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/global.css">
+	<link rel="stylesheet" type="text/css" href="http://libs.useso.com/js/font-awesome/4.2.0/css/font-awesome.min.css">
+  <script src='//cdn.bootcss.com/jquery/3.0.0/jquery.min.js'></script>
+  <script>
+    var role={$row['role']}; 
+    $(function(){
+      if(role){
+        $(".c-select").val(role); 
+      }
+    });
+    </script>
+</head>
+<style>
+	html,body{background:#f0f0f0}
+</style>
+<body>
+  <include file="./include-head" />
+	<div class='w-1000 white p-b-md' style="margin-top:5rem!important">
+		<div class="padding">
+			<form action="/home/login/create" method='POST'>
+				<input type="hidden" name="id" value="{$row['id']}">
+                <div class="row-col h-auto m-b-lg">
+                  <div class="col-sm-3">
+                    <div class="avatar w-64 inline">
+                      <img src="http://flatfull.com/themes/flatkit/assets/images/a0.jpg">
+                    </div>
+                  </div>
+                  <div class="col-sm-9 v-m h2 _300">
+                    <div class="p-l-xs">
+                      <input type="text" placeholder="姓名" name="true_name" class="form-control inline" value='{$row["true_name"]}'>
+                    </div>
+                  </div>
+                </div>
+                <!-- fields -->
+                <div class="form-horizontal">
+                  <div class="form-group row">
+                    <label class="col-sm-3 form-control-label">手机</label>
+                    <div class="col-sm-9">
+                      <input type="text" name="tel" class="form-control" ng-show="item.editing" ng-model="item.mobile" value='{$row["tel"]}'>
+                    </div>
+                  </div>
+					<div class="form-group row">
+		              <label class="col-sm-3 form-control-label">职位</label>
+		              <div class="col-sm-9">
+		                <select class="form-control c-select" name="role" value="{$row['role']}">
+		                  <option value='1'>管理员</option>
+		                  <option value='2'>采购</option>
+		                  <option value='3'>销售</option>
+		                  <option value='4'>仓储</option>
+		                  <option value='5'>财务</option>
+		                  <option value='6'>其他</option>
+		                </select>
+		              </div>
+				    </div>                  
+				  <div class="form-group row">
+                    <label class="col-sm-3 form-control-label">密码</label>
+                    <div class="col-sm-9">
+                      <input type="password"  name="password" class="form-control" ng-show="item.editing" ng-model="item.company">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-3 form-control-label">备注</label>
+                    <div class="col-sm-9">
+                      <textarea class="form-control" ng-show="item.editing" ng-model="item.note" rows="5" value="{$row['note']}" name='note'>{$row['note']}</textarea>
+                    </div>
+                  </div>
+                </div>
+                <div class="p-a text-left col-md-offset-3">
+            		<button type="submit" class="btn info">保存</button>
+          		</div>
+            </form>
+        </div><!--end of padding-->
+	</div><!--end w-1000-->
+</body>
+</html>
