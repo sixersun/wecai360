@@ -20,10 +20,14 @@ class ShoppingController extends Controller {
     	$arr=array(
     		'user_id'=>$this->user['id'],
     		'pro_id'=>$data['id'],
-    		'pro_code'=>$data['code'],
+    		'code'=>$data['code'],
     		'proname'=>$data['proname'],
     		'pro_num'=>$data['num']?$data['num']:1,
-    		'pro_price'=>$data['price'],
+            'supplier'=>$data['supplier'],
+    		'price'=>$data['price'],
+            'model'=>$data['model'],
+            'note'=>$data['note'],
+            'img'=>$data['img'],
     		'status'=>1,
     		);
     	if(!D('shopping')->saveshooping($arr)){

@@ -21,27 +21,57 @@ class BatchController extends Controller {
 	    $excel=$file['tmp_name'];
 	    //$excel=file_get_contents($file['tmp_name']);
         import('@.Org.excel.PHPexcel');
-        $reader = \PHPExcel_IOFactory::createReader('Excel2007'); 
-        $PHPExcel = $reader->load($excel); // 载入excel文件
-        //$sheetcount=$PHPExcel->getSheetCount();//获取工作表的数量	    
-		$currentSheet=$PHPExcel->getSheet(0);
-		//获取总列数
-		$allColumn=$currentSheet->getHighestColumn();
-		//获取总行数
-		$allRow=$currentSheet->getHighestRow();
-		//循环获取表中的数据，$currentRow表示当前行，从哪行开始读取数据，索引值从0开始
-		for($currentRow=2;$currentRow<=$allRow;$currentRow++){
-			//从哪列开始，A表示第一列
+        $objPHPExcel = new \PHPExcel();  
+          
+        $objReader = \PHPExcel_IOFactory::createReader('Excel5');  //加载2003的  
+          
+        $objPHPExcel = $objReader->load($excel);  //载入文件  
+        foreach ($objPHPExcel->getSheet(0)->getDrawingCollection() as $k => $drawing) {  
+          
+                $codata = $drawing->getCoordinates(); //得到单元数据 比如G2单元  
+          
+                $filename = $drawing->getIndexedFilename();  //文件名
+          
+                ob_start();  
+          
+                call_user_func(  
+
+                    $drawing->getRenderingFunction(),  
+          
+                    $drawing->getImageResource()  
+          
+                );  
+          
+                $imageContents = ob_get_contents();  
+                //echo $filename;
+                $return=file_put_contents('up/'.$codata.'_'.$filename,$imageContents); //把文件保存到本地  
+                $row[]="/up/".$codata."_".$filename;
+                ob_end_clean();  
+          
+        }
+        //$sheetcount=$PHPExcel->getSheetCount();//获取工作表的数量     
+        $currentSheet=$objPHPExcel->getSheet(0);
+        //获取总列数
+        $allColumn=$currentSheet->getHighestColumn();
+        //获取总行数
+        $allRow=$currentSheet->getHighestRow();
+        //循环获取表中的数据，$currentRow表示当前行，从哪行开始读取数据，索引值从0开始
+        $return=array();
+        for($currentRow=3;$currentRow<=$allRow;$currentRow++){
+            //从哪列开始，A表示第一列
             $arr=array();
-			for($currentColumn='A';$currentColumn<=$allColumn;$currentColumn++){
-				//数据坐标
-				$address=$currentColumn.$currentRow;
-				//读取到的数据，保存到数组$arr中
-				$arr[]=$currentSheet->getCell($address)->getValue();
-			}
+            for($currentColumn='B';$currentColumn<=$allColumn;$currentColumn++){
+                //数据坐标
+                $address=$currentColumn.$currentRow;
+                //读取到的数据，保存到数组$arr中
+                $arr[]=$currentSheet->getCell($address)->getValue();
+               
+            }
+            $arr[0]=$row[$currentRow-3];
+            $return[]=$arr;
             if(!D('Product')->batch_product($arr)) return false;
-		
-		}
+        
+        }
         $this->success('数据导入成功');
 	}
 	// public function export_excel(){

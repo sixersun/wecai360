@@ -40,14 +40,17 @@ class ProductModel extends Model {
         return $this->where('code="'.$code.'"')->find();
     }
     public function batch_product($data){
-        $_data['code']=$data[0];
+        $_data['code']=$data[3];
         $_data['proname']=$data[1];
-        $_data['price']=$data[2];
-        $_data['date']=$data[3];
-        $_data['shelf']=$data[4];
-        $_data['supplier']=$data[5];
+        $_data['price']=$data[5];
+        //$_data['date']=$data[3];
+        //$_data['shelf']=$data[4];
+        //$_data['supplier']=$data[5];
         $_data['stock']=$data[6];
-        $_data['note']=$data[7];
+        $_data['note']=$data[4];
+        $_data['img']=$data[0];
+        $_data['model']=$data[2];
+        D('Productbuylog')->add_buy_log($_data);
         $row=$this->search_code($_data['code']);
         if(is_array($row)) {
             $_data['stock']=$row['stock']+$_data['stock'];

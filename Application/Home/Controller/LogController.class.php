@@ -13,7 +13,12 @@ class LogController extends Controller {
         $this->display('./buylog');
     }
     public function buy(){
-    	if($this->user['role']!=1&&$this->user['role']!=2) $this->error('你没有该权限');
+        if($this->user['role']!=1&&$this->user['role']!=2) $this->error('你没有该权限');
+        $id=I('path.2');
+        $return=D('Product')->get_product($id);
+        $code=$return['code'];
+        $list=D('Productbuylog')->get_buy_log($code);
+        $this->assign('list',$list);
     	$this->display('./buylog');
     }
     public function sale(){

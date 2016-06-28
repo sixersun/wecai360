@@ -23,6 +23,7 @@
       <table class="table table-striped b-t">
         <thead>
           <tr>
+            <th></th>
             <th>价格</th>
             <th>数量</th>
             <th>采购人</th>
@@ -31,76 +32,16 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>199.00</td>
-            <td>100</td>
-            <td>ROOTXIA</td>
-            <td>Jul 25, 2013</td>
-            <td>供应商A</td>
-          </tr>
-          <tr>
-            <td>198.00</td>
-            <td>200</td>
-            <td>ROOTXIA</td>
-            <td>Jul 25, 2013</td>
-            <td>供应商B</td>
-          </tr>
-          <tr>
-            <td>199.00</td>
-            <td>100</td>
-            <td>ROOTXIA</td>
-            <td>Jul 25, 2013</td>
-            <td>供应商A</td>
-          </tr>
-          <tr>
-            <td>198.00</td>
-            <td>200</td>
-            <td>ROOTXIA</td>
-            <td>Jul 25, 2013</td>
-            <td>供应商B</td>
-          </tr>
-          <tr>
-            <td>199.00</td>
-            <td>100</td>
-            <td>ROOTXIA</td>
-            <td>Jul 25, 2013</td>
-            <td>供应商A</td>
-          </tr>
-          <tr>
-            <td>198.00</td>
-            <td>200</td>
-            <td>ROOTXIA</td>
-            <td>Jul 25, 2013</td>
-            <td>供应商B</td>
-          </tr>
-          <tr>
-            <td>199.00</td>
-            <td>100</td>
-            <td>ROOTXIA</td>
-            <td>Jul 25, 2013</td>
-            <td>供应商A</td>
-          </tr>
-          <tr>
-            <td>199.00</td>
-            <td>100</td>
-            <td>ROOTXIA</td>
-            <td>Jul 25, 2013</td>
-            <td>供应商A</td>
-          </tr>
-          <tr>
-            <td>198.00</td>
-            <td>200</td>
-            <td>ROOTXIA</td>
-            <td>Jul 25, 2013</td>
-            <td>供应商B</td>
-          </tr>
-          <tr>
-            <td>199.00</td>
-            <td>100</td>
-            <td>ROOTXIA</td>
-            <td>Jul 25, 2013</td>
-            <td>供应商A</td>
-          </tr>
+          <volist  name='list' id="list"> 
+            <tr>
+              <td><img src="{$list.img}" style="max-height:40px;max-width:40px;overflow:hidden"></td>
+              <td>{$list.price}</td>
+              <td>{$list.stock}</td>
+              <td>{$list.user_name}</td>
+              <td>{$list.add_time}</td>
+              <td>{$list.supplier}</td>
+            </tr>
+          </volist>
         </tbody>
       </table>
     </div>
