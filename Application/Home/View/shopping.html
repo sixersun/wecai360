@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
-	<meta charset="UTF-8">
-	<title>微采360|购物车</title>
-	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="/static/css/app.min.css">
-	<link rel="stylesheet" type="text/css" href="/static/css/global.css">
-	<link rel="stylesheet" type="text/css" href="http://libs.useso.com/js/font-awesome/4.2.0/css/font-awesome.min.css">
+  <meta charset="UTF-8">
+  <title>微采360|购物车</title>
+  <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/app.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/global.css">
+  <link rel="stylesheet" type="text/css" href="http://libs.useso.com/js/font-awesome/4.2.0/css/font-awesome.min.css">
   <script src='//cdn.bootcss.com/jquery/3.0.0/jquery.min.js'></script>
 </head>
 <style>
-	html,body{background:#f0f0f0}
+  html,body{background:#f0f0f0}
   .table td{
     line-height:3.5
   }
@@ -28,7 +28,6 @@
 </style>
 <script>
   var data=<?php echo json_encode($list);?>;
-  console.log(data);
   $(function(){
       $('.pm').click(function(){
           var proprice=$(this).parents('.pro').find('.proprice').val();
@@ -58,16 +57,18 @@
           data[p_id-1]['price']=proprice;
       });
       $('.export_excel').click(function(){
-          $.post('/home/shopping/export_excel',{data:data},function(ret){
+          //var str = data.toJSONString();
+          var str = JSON.stringify(data)
+          $('#form_data').val(str);
+          $('#excel_form').submit();
 
-          },'json');
       });
   });
 </script>
 <body>
     <include file="./include-head" />
     <div ui-view="" class="app-body" id="view" style="margin-top:4rem!important">
-		<div class='w-1000 white p-b-md'>
+    <div class='w-1000 white p-b-md'>
     <div class="box">
       <div class="box-header">
         <h3>购物车</h3>
@@ -125,8 +126,8 @@
       </table>
     </div>
   </div>
-	</div>
-	</div>
+  </div>
+  </div>
   <div class="white w-footer">
     <div class="footer p-a p-x-md">
       <div class="row">
@@ -136,6 +137,9 @@
           </a>
         </div>
         <div class="col-sm-3 col-md-offset-6">
+            <form action="/home/shopping/export_excel" method='POST' id="excel_form">
+                <input type="hidden" name='data' id='form_data'>
+            </form>
             <button class="btn btn-fw primary m-t export_excel">导出Excel</button>
         </div>
       </div>
