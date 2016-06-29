@@ -8,8 +8,8 @@ class SearchController extends Controller {
 		$this->user=session('user');
 	}
     public function index(){
-    	$type=I('post.search_type');
-    	$content=I('post.content');
+    	$type=I('get.search_type');
+    	$content=I('get.content');
     	if(!$content) $this->error('请输入搜索内容');
     	$return=D('Product')->get_search($content,$type);
     	$this->assign('user',$this->user);

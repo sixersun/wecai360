@@ -102,7 +102,6 @@ class BatchController extends Controller {
                 $i=chr($span);
                 $column=1;
                 foreach ($value as $setkey => $setvalue) {
-                	echo $setvalue;
                     $PHPExcel->getactivesheet()->setCellValue($i.$column,$setvalue);//保存数据
                     $column++;
                 }
@@ -128,7 +127,7 @@ class BatchController extends Controller {
         header('Cache-Control: max-age=0');
         ob_clean();//关键
         flush();//关键
-        $Writer = \PHPExcel_IOFactory::createWriter($PHPExcel, 'Excel2007');
+        $Writer = \PHPExcel_IOFactory::createWriter($PHPExcel, 'Excel5');
         $Writer->save('php://output');
 
     }
