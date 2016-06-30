@@ -78,47 +78,49 @@
 				<ul>
 					<volist name="data" id='data' offset='0'>
 					<li class="col-md-3 m-b-md product_list" style="margin:0;padding:0">
-						<div class="row row-col no-gutter">
-							<div class="row_bg"></div>
-							<div class="row-col">
-								<div style="width:268px;height:268px;position:relative">
-									<if condition='$data["img"] neq ""'>
-										<img src="{$data.img}" alt="" style="width:266px;height:266px">
-									<else />
-										<img src="/static/images/nopic.jpg" alt="" style="width:270px;height:270px">
-									</if>
-									<div class="list-btn">
-										<div class="btn-group btn-group-sm pull-right">
-											<if condition="($user['role'] eq 1) OR ($user['role'] eq 2)">
-												<a class="btn orange" href="/log/buy/{$data['id']}">历史采购价格</a>
-											</if>
-											<if condition="($user['role'] eq 1) OR ($user['role'] eq 3)">
-												<a class="btn orange" href="/log/sale/{$data['id']}">历史零售价格</a>
-											</if>
-											<button class="btn orange shopping" data-shopid="{$i}">加入购物车</button>
-											<if condition="($user['role'] eq 1) OR ($user['role'] eq 2)">
-												<a class="btn orange"  href="/home/edit/{$data['id']}">编辑</a>
-											</if>
+						<a href="/product/{$data.id}">
+							<div class="row row-col no-gutter">
+								<div class="row_bg"></div>
+								<div class="row-col">
+									<div style="width:268px;height:268px;position:relative">
+										<if condition='$data["img"] neq ""'>
+											<img src="{$data.img}" alt="" style="width:266px;height:266px">
+										<else />
+											<img src="/static/images/nopic.jpg" alt="" style="width:270px;height:270px">
+										</if>
+										<div class="list-btn">
+											<div class="btn-group btn-group-sm pull-right">
+												<if condition="($user['role'] eq 1) OR ($user['role'] eq 2)">
+													<a class="btn orange" href="/log/buy/{$data['id']}">历史采购价格</a>
+												</if>
+												<if condition="($user['role'] eq 1) OR ($user['role'] eq 3)">
+													<a class="btn orange" href="/log/sale/{$data['id']}">历史零售价格</a>
+												</if>
+												<button class="btn orange shopping" data-shopid="{$i}">加入购物车</button>
+												<if condition="($user['role'] eq 1) OR ($user['role'] eq 2)">
+													<a class="btn orange"  href="/home/edit/{$data['id']}">编辑</a>
+												</if>
+											</div>
 										</div>
 									</div>
-								</div>
-								<div class="m-l-sm m-r-sm m-b-sm product_info">
-									<div class="desc-wrap pos-rlt clear">
-										<span class="pointer text-ellipsis pull-left" style="font-size:20px">{$data.proname}</span>
+									<div class="m-l-sm m-r-sm m-b-sm product_info">
+										<div class="desc-wrap pos-rlt clear">
+											<span class="pointer text-ellipsis pull-left" style="font-size:20px">{$data.proname}</span>
+										</div>
+										<div class="text-grey text-xs m-b-sm">
+											<p style="font-size:30px;color:#ff6600;font-weight:700">¥{$data.price}</p>
+											<p class="m-r">物品编号：{$data.code}</p>
+											<p class="m-r" data-add-time="">型号：{$data.model}</p>
+											<p>供应商：{$data.supplier}</p>
+										</div>
+										<div class="text-grey text-xs m-b-sm">
+											<p class="m-r">库存：{$data.stock}</p>
+										</div>
+										<div class="text-darkgrey text-xs text-ellipsis" data-text="">产品参数:{$data.note}</div>
 									</div>
-									<div class="text-grey text-xs m-b-sm">
-										<p style="font-size:30px;color:#ff6600;font-weight:700">¥{$data.price}</p>
-										<p class="m-r">物品编号：{$data.code}</p>
-										<p class="m-r" data-add-time="">型号：{$data.model}</p>
-										<p>供应商：{$data.supplier}</p>
-									</div>
-									<div class="text-grey text-xs m-b-sm">
-										<p class="m-r">库存：{$data.stock}</p>
-									</div>
-									<div class="text-darkgrey text-xs text-ellipsis" data-text="">产品参数:{$data.note}</div>
 								</div>
 							</div>
-						</div>
+						</a>
 					</li>
 					</volist>
 				</ul>
