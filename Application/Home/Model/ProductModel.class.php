@@ -15,7 +15,7 @@ class ProductModel extends Model {
     public function save_product($data){
     	 return $this->where('`code`="'.$data['code'].'"')->save($data);
     }
-    public function get_search($content,$type){
+    public function get_search($content,$type,$limit='0,12'){
     	switch ($type) {
     		case '1':
     			$key='`code`';
@@ -33,8 +33,29 @@ class ProductModel extends Model {
     			$key='`code`';
     			break;
     	}
-    	$return=$this->where($key.' like "%'.$content.'%"')->select();
+    	$return=$this->where($key.' like "%'.$content.'%"')->limit($limit)->order('id desc')->select();
     	return $return;
+    }
+    public function get_count($content,$type){
+        switch ($type) {
+            case '1':
+                $key='`code`';
+                break;
+            case '2':
+                $key='`proname`';
+                break;  
+            case '3':
+                $key='`supplier`';
+                break;
+            case '4':
+                $key='`note`';
+                break;
+            default:
+                $key='`code`';
+                break;
+        }
+        $return=$this->where($key.' like "%'.$content.'%"')->count();
+        return $return;        
     }
     public function search_code($code){
         return $this->where('code="'.$code.'"')->find();
