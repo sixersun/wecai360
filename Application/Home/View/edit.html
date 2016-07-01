@@ -7,6 +7,10 @@
 	<link rel="stylesheet" type="text/css" href="/static/css/app.min.css">
 	<link rel="stylesheet" type="text/css" href="/static/css/global.css">
 	<link rel="stylesheet" type="text/css" href="http://libs.useso.com/js/font-awesome/4.2.0/css/font-awesome.min.css">
+	<script src='//cdn.bootcss.com/jquery/3.0.0/jquery.min.js'></script>
+	<script src="/static/js/vendor/jquery.ui.widget.js"></script>
+	<script src="/static/js/jquery.iframe-transport.js"></script>
+	<script src="/static/js/jquery.fileupload.js"></script>
 </head>
 <style>
 	html,body{background:#f0f0f0}
@@ -21,13 +25,14 @@
 				    <div class="tab-content pos-rlt">
 				      	<div class="tab-pane active" id="tab-1">
 					        <!-- <div class="p-a-md dker _600">椅子</div> -->
-					        <form role="form" class="p-a-md col-md-6" method="POST" action='/home/edit/save'>
+					        <form role="form" class="p-a-md col-md-6" method="POST" action='/home/edit/save' enctype="multipart/form-data" method="POST">
 					          <div class="form-group">
 					            <label>图片</label>
 					            <div class="form-file">
-					              <input type="file" class="has-value" name="img" value="{$row['img']}">
-					              <input type="hidden" name="img" value="{$row['img']}">
-					              <button class="btn white">更新图片</button>
+					              <input type="file" class="has-value" name="uploadfile" value="{$row['img']} "  onchange="fileup(this)" id='fileupload'>
+					              <button class="btn white" id="filename">更新图片</button>
+					              <input type="hidden" name='img' value='{$row["img"]}' id="up_img">
+					              <input type="hidden" name='upimg' value='0' id="up_img_status">
 					            </div>
 					          </div>
 					          <div class="form-group">
@@ -73,7 +78,7 @@
 					          <button type="submit" class="btn btn-info m-t">更新信息</button>
 					        </form>
 					        <div class="col-md-6 offset-md-6">
-					        	<img src="{$row['img']}" alt="" style="width:100%">
+					        	<img src="{$row['img']}" alt="" style="width:100%" id="pro_img">
 					        </div>
 				      	</div>
 				 	 </div>
@@ -83,3 +88,29 @@
 	</div>
 </body>
 </html>
+<script>
+	function fileup(ele) {
+		$('#filename').html(ele.files[0].name);
+	}
+$(function () {
+    // Change this to the location of your server-side upload handler:
+    var url = '/home/edit/uploadfile'
+    $('#fileupload').fileupload({
+        url: url,
+        dataType: 'json',
+        done: function (e, data) {
+               $('#up_img').val(data.result.info);
+               $('#pro_img').attr('src',data.result.info);
+               $('#up_img_status').val(1);
+        },
+        progressall: function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('#progress .progress-bar').css(
+                'width',
+                progress + '%'
+            );
+        }
+    }).prop('disabled', !$.support.fileInput)
+        .parent().addClass($.support.fileInput ? undefined : 'disabled');
+});
+</script>

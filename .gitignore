@@ -3,3 +3,5 @@
 Application/Common/Conf/config.php
 
 www/up
+www/uploadfile
+www/uploads
