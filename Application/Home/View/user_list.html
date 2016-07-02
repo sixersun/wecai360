@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <title>微采360|购物车</title>
+  <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/app.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/global.css">
+  <link rel="stylesheet" type="text/css" href="http://libs.useso.com/js/font-awesome/4.2.0/css/font-awesome.min.css">
+  <script src='//cdn.bootcss.com/jquery/3.0.0/jquery.min.js'></script>
+</head>
+<style>
+  html,body{background:#f0f0f0}
+  .table td{
+    line-height:3.5
+  }
+  .w-footer{
+
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #fff;
+    box-shadow: 1px 1px 1px #ccc;
+    border-top: 1px solid #f0f0f0;
+    margin-top: 90px;
+
+  }
+  a{cursor:pointer;}
+</style>
+<body>
+    <include file="./include-head" />
+    <div ui-view="" class="app-body" id="view" style="margin-top:4rem!important">
+    <div class='w-1000 white p-b-md'>
+    <div class="box">
+      <div class="box-header">
+        <h3>用户列表 <a href="/home/user/createnew" target="_blank" style="color:#08c;font-size:14px">新增用户</a></h3>
+      </div>
+    <div class="table-responsive">
+      <table class="table table-striped b-t">
+        <thead>
+          <tr>
+            <th>用户ID</th>
+            <th>角色</th>
+            <th>真实姓名</th> 
+            <th>电话号码(账号)</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <volist name="userlist" id='list' > 
+            <tr class="pro">
+              <td>{$list.id}</td>
+              <td>{$list.role_name}</td>
+              <td>{$list.true_name}</td>
+              <td>{$list.tel}</td>
+              <td>
+                <a href="/home/user/edit/{$list.id}" >编辑</a> |
+                <a href="/home/user/delete/{$list.id}">删除</a>
+              </td>
+            </tr>
+          </volist>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  </div>
+  </div>
+  <div class="white w-footer">
+    <div class="footer p-a p-x-md">
+      <div class="row">
+        <div class="col-sm-3 clearfix">
+          <a class="navbar-brand">
+            <span class="hidden-folded inline">微采360</span>
+          </a>
+        </div>
+        <div class="col-sm-3 col-md-offset-6">
+            <form action="/home/shopping/export_excel" method='POST' id="excel_form">
+                <input type="hidden" name='data' id='form_data'>
+            </form>
+            <button class="btn btn-fw primary m-t export_excel">导出Excel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </body>
+</html>

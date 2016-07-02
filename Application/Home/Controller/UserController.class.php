@@ -34,8 +34,11 @@ class UserController extends Controller {
     	}
     	if(!$return) $this->error('出现错误，请联系管理员');
     	$this->success('Success');
-    	
-
+    }
+    public function userlist(){
+        $user_list=M('User')->order('id desc')->select();
+        $this->assign('userlist',$user_list);
+        $this->display('./user_list');
     }
     public function edit(){
     	$id=I('path.2');
