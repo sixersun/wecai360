@@ -14,6 +14,7 @@
 </head>
 <style>
 	html,body{background:#f0f0f0}
+	.tab-content{background:#fff}
 </style>
 <body>
 	<include file="./include-head" />
@@ -21,16 +22,18 @@
 		<div class='row m-b-md text-left'>
 			<div class='col-md-12 m-t-lg'>
 				<div style='clear:both'></div>
+				<a class='btn btn-info m-l-md' href="javascript:history.go(-1);">返回</a>
 				<div class=" light lt bg-auto">
+
 				    <div class="tab-content pos-rlt">
+				    	
 				      	<div class="tab-pane active" id="tab-1">
-					        <!-- <div class="p-a-md dker _600">椅子</div> -->
 					        <form role="form" class="p-a-md col-md-6" method="POST" action='/home/edit/save' enctype="multipart/form-data" method="POST">
 					          <div class="form-group">
 					            <label>图片</label>
 					            <div class="form-file">
 					              <input type="file" class="has-value" name="uploadfile" value="{$row['img']} "  onchange="fileup(this)" id='fileupload'>
-					              <button class="btn white" id="filename">更新图片</button>
+					              <button class="btn white" id="filename">更新图片</button><span>&nbsp;&nbsp;要求尺寸：600*600px</span>
 					              <input type="hidden" name='img' value='{$row["img"]}' id="up_img">
 					              <input type="hidden" name='upimg' value='0' id="up_img_status">
 					            </div>

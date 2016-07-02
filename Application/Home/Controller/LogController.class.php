@@ -18,11 +18,18 @@ class LogController extends Controller {
         $return=D('Product')->get_product($id);
         $code=$return['code'];
         $list=D('Productbuylog')->get_buy_log($code);
+        $this->assign('name',$return['proname']);
         $this->assign('list',$list);
     	$this->display('./buylog');
     }
     public function sale(){
     	if($this->user['role']!=1&&$this->user['role']!=3) $this->error('你没有该权限');
+        $id=I('path.2');
+        $return=D('Product')->get_product($id);
+        $code=$return['code'];
+        $list=D('Productsalelog')->get_sale_log($code);
+        $this->assign('name',$return['proname']);
+        $this->assign('list',$list);
     	$this->display('./buylog');
     }
 }

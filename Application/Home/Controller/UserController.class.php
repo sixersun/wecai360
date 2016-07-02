@@ -36,6 +36,9 @@ class UserController extends Controller {
     	$this->success('Success');
     }
     public function userlist(){
+        $role=session('user.role');
+        $user_id=session('user.id');
+        if($role!=1&&$user_id!=$id) $this->error('用户权限错误');
         $user_list=M('User')->order('id desc')->select();
         $this->assign('userlist',$user_list);
         $this->display('./user_list');
@@ -50,5 +53,13 @@ class UserController extends Controller {
     	if(!$return) $this->error('用户不存在');
     	$this->assign('row',$return);
     	$this->display('./createnew');
+    }
+    public function delete(){
+        $role=session('user.role');
+        $user_id=session('user.id');
+        if($role!=1&&$user_id!=$id) $this->error('你没有改权限');
+        $id=I('path.2');
+        if(!M('User')->where('id='.$id)->delete()) $this->error('用户删除失败');
+        $this->success('删除成功');
     }
 }
