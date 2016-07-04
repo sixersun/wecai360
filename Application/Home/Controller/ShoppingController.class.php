@@ -14,6 +14,12 @@ class ShoppingController extends Controller {
         $this->assign('list',$list);
         $this->display('./shopping');
     }
+    public function del_id(){
+        $id=I('post.shopping_id');
+        if(!is_numeric($id)) return false;
+        if(!D('Shopping')->delshopping($id)) ajax(-1,'删除失败',null);
+        ajax(1,'删除成功',null);
+    }
     public function in(){
         if(!$_POST) return false;
         $data=I('post.data');
@@ -30,7 +36,7 @@ class ShoppingController extends Controller {
             'img'=>$data['img'],
             'status'=>1,
             );
-        if(!D('shopping')->saveshooping($arr)){
+        if(!D('shopping')->saveshoping($arr)){
             ajax(-1,'添加到购物车失败',null);
         }
         ajax(1,'添加到购物车',null);

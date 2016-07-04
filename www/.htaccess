@@ -5,6 +5,7 @@
   RewriteRule ^log/buy/([0-9]+)$ /home/log/buy/$1 [QSA,PT,L]
   RewriteRule ^log/sale/([0-9]+)$ /home/log/sale/$1 [QSA,PT,L]
   RewriteRule ^home/edit/([0-9]+)$ /home/edit/index/$1 [QSA,PT,L]
+  RewriteRule ^safecode /home/login/verify_c [QSA,PT,L]
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteRule ^(.*)$ index.php/$1 [QSA,PT,L]

@@ -23,9 +23,10 @@ class UserModel extends Model {
     	$tel=$data['tel'];
     	$password=$data['password'];
     	$_password=hash('md5',$key.$password);
-        if(!$_password==$password) return false;
+        //if(!$_password==$password) return false;
     	$check=$this->where('tel='.$tel)->find();//判断手机号码是否存在
     	if(!is_array($check)) return false;//手机号码不存在
+        if(!$_password==$check['password']) return false;
     	unset($check['password']);
     	session('user',$check);
     	return true;
