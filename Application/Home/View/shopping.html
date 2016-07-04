@@ -29,6 +29,19 @@
 <script>
   var data=<?php echo json_encode($list);?>;
   $(function(){
+      $('.pronum').blur(function(){
+        $('.pm').click();
+      });
+      $('.pronum').bind('keyup', function(event) {
+        if (event.keyCode == "13") {
+            $('.pm').click();
+        }
+      });
+      $('.proprice').bind('keyup', function(event) {
+        if (event.keyCode == "13") {
+            $('.proprice').blur();
+        }
+      });
       $('.pm').click(function(){
           var proprice=$(this).parents('.pro').find('.proprice').val();
           var action=$(this).attr('data-a');
