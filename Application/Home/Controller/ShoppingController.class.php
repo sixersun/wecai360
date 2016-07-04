@@ -42,11 +42,12 @@ class ShoppingController extends Controller {
         ajax(1,'添加到购物车',null);
     }
     public function export_excel(){
-
         $data=trim($_POST['data']);
         $data=json_decode($data,true);
         foreach ($data as $k => $v) {
-            $arr[]=array($k+1,$v['img'],$v['proname'],$v['model'],$v['code'],$v['note'],$v['price'],$v['pro_num']);
+            if(!empty($data[$k])){
+                $arr[]=array($k+1,$v['img'],$v['proname'],$v['model'],$v['code'],$v['note'],$v['price'],$v['pro_num']);
+            } 
         }
         $this->push($arr);
     }
