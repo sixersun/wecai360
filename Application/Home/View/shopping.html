@@ -83,7 +83,6 @@
             var shopping_id=$(this).attr('data-shop-id');
             var data_id=$(this).attr('data-id');
             var pro=$(this).parents('.pro');
-            console.log(pro);
             $.post('/home/shopping/del_id',{shopping_id:shopping_id},function(ret){
                 if(ret.status==1){
                   data_id=data_id-1;
@@ -94,7 +93,13 @@
         }else{
            return false;
         }
-      })
+      });
+      
+      $('.out_pdf').click(function(){
+          var str = JSON.stringify(data)
+          $('#out_html').val(str);
+          $('#out_pdf').submit();
+      });
   });
 </script>
 <body>
@@ -168,10 +173,14 @@
             <span class="hidden-folded inline">微采360</span>
           </a>
         </div>
-        <div class="col-sm-3 col-md-offset-6">
+        <div class="col-sm-3 col-md-offset-5">
             <form action="/home/shopping/export_excel" method='POST' id="excel_form">
                 <input type="hidden" name='data' id='form_data'>
             </form>
+            <form action="/home/shopping/outpdf" method='POST' id="out_pdf">
+                <input type="hidden" name='html' id="out_html">
+            </form>
+            <button class="btn btn-fw primary m-t out_pdf">导出PDF</button>&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="btn btn-fw primary m-t export_excel">导出Excel</button>
         </div>
       </div>
