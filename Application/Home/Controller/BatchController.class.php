@@ -20,7 +20,7 @@ class BatchController extends Controller {
 	    }
 	    $excel=$file['tmp_name'];
 	    //$excel=file_get_contents($file['tmp_name']);
-        import('@.Org.excel.PHPexcel');
+        import('@.Org.excel.PHPExcel');
         $objPHPExcel = new \PHPExcel();  
           
         $objReader = \PHPExcel_IOFactory::createReader('Excel5');  //加载2003的  
