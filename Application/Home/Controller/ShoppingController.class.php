@@ -44,9 +44,12 @@ class ShoppingController extends Controller {
     public function export_excel(){
         $data=trim($_POST['data']);
         $data=json_decode($data,true);
-        foreach ($data as $k => $v) {
-            if(!empty($data[$k])){
-                $arr[]=array($k+1,$v['img'],$v['proname'],$v['model'],$v['code'],$v['note'],$v['price'],$v['pro_num']);
+        $sort=$_POST['sort'];
+        $sort=json_decode($sort,true);
+        foreach ($sort as $k => $v) {
+            $d_v=$v-1;
+            if(!empty($data[$d_v])){
+                $arr[]=array($k+1,$v['img'],$data[$d_v]['proname'],$data[$d_v]['model'],$data[$d_v]['code'],$data[$d_v]['note'],$data[$d_v]['price'],$data[$d_v]['pro_num']);
             } 
         }
         $this->push($arr);
@@ -109,17 +112,25 @@ class ShoppingController extends Controller {
         $write->save('php://output');
     }
     public function outpdf(){
+        $sort=$_POST['sort'];
+        $sort=json_decode($sort,true);
         $data=trim($_POST['html']);
         $data=json_decode($data,true);
         $html='<table><tr><th width="50">序号</th><th align="center" width="100">图片</th><th align="center">产品名称</th><th>产品型号</th><th>编号</th><th width="120">备注</th><th>价格</th><th>数量</th></tr>';
         $str='';
-        foreach ($data as $k => $v) {
-            if(!empty($data[$k])){
-                $str='<tr><td>'.($k+1).'</td><td width="100"><img src="'.$v['img'].'"></td><td align="center">'.$v['proname'].'</td><td>'.$v['model'].'</td><td>'.$v['code'].'</td><td>'.$v['note'].'</td><td>'.$v['price'].'</td><td>'.$v['pro_num'].'</td></tr>';
+        // foreach ($data as $k => $v) {
+        //     if(!empty($data[$k])){
+        //         $str='<tr><td>'.($k+1).'</td><td width="100"><img src="'.$v['img'].'"></td><td align="center">'.$v['proname'].'</td><td>'.$v['model'].'</td><td>'.$v['code'].'</td><td>'.$v['note'].'</td><td>'.$v['price'].'</td><td>'.$v['pro_num'].'</td></tr>';
+        //     }
+        //     $html=$html.$str; 
+        // }
+        foreach($sort as $k=>$v){
+            $d_v=$v-1;
+            if(!empty($data[$d_v])){
+                $str='<tr><td>'.($k+1).'</td><td width="100"><img src="'.$data[$d_v]['img'].'"></td><td align="center">'.$data[$d_v]['proname'].'</td><td>'.$data[$d_v]['model'].'</td><td>'.$data[$d_v]['code'].'</td><td>'.$data[$d_v]['note'].'</td><td>'.$data[$d_v]['price'].'</td><td>'.$data[$d_v]['pro_num'].'</td></tr>';
             }
-                    $html=$html.$str; 
+            $html=$html.$str;             
         }
-
         $html=$html.'</table>';
         import('@.Org.tcpdf.tcpdf');
         $pdf = new \TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
