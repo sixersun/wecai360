@@ -49,7 +49,7 @@ class ShoppingController extends Controller {
         foreach ($sort as $k => $v) {
             $d_v=$v-1;
             if(!empty($data[$d_v])){
-                $arr[]=array($k+1,$v['img'],$data[$d_v]['proname'],$data[$d_v]['model'],$data[$d_v]['code'],$data[$d_v]['note'],$data[$d_v]['price'],$data[$d_v]['pro_num']);
+                $arr[]=array($k+1,$data[$d_v]['img'],$data[$d_v]['proname'],$data[$d_v]['model'],$data[$d_v]['code'],$data[$d_v]['note'],$data[$d_v]['price'],$data[$d_v]['pro_num']);
             } 
         }
         $this->push($arr);

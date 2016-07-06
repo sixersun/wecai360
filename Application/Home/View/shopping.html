@@ -73,7 +73,9 @@
       });
       $('.export_excel').click(function(){
           //var str = data.toJSONString();
-          var str = JSON.stringify(data)
+          var str = JSON.stringify(data);
+          var sort=getsort();
+          $('#form_sort').val(JSON.stringify(sort));
           $('#form_data').val(str);
           $('#excel_form').submit();
 
@@ -194,7 +196,7 @@
         </div>
         <div class="col-sm-3 col-md-offset-5">
             <form action="/home/shopping/export_excel" method='POST' id="excel_form">
-                <input type="hidden" name="sort[]" id="form_sort">
+                <input type="hidden" name="sort" id="form_sort">
                 <input type="hidden" name='data' id='form_data'>
             </form>
             <form action="/home/shopping/outpdf" method='POST' id="out_pdf">
