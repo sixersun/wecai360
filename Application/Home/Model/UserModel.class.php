@@ -31,6 +31,21 @@ class UserModel extends Model {
     	session('user',$check);
     	return true;
     }
+    public function checkguestlogin($tel){
+        //判断角色
+        $check=$this->where('tel='.$tel)->find();//判断手机号码是否存在
+        if(is_array($check)){//用户已存在，直接登录
+            unset($check['password']);
+            session('user',$check);
+            return true;
+        }else{
+            $data['role']=6;
+            $data['role_name']='其他';
+            $data['true_name']='贵宾';
+            $data['tel']=$tel;
+            return $this->add($data);
+        }
+    }
     public function getuser($id){
     	$return=$this->where('id='.$id)->find();
     	if(!is_array($return)) return false;

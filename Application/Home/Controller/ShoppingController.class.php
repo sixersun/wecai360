@@ -20,6 +20,20 @@ class ShoppingController extends Controller {
         if(!D('Shopping')->delshopping($id)) ajax(-1,'删除失败',null);
         ajax(1,'删除成功',null);
     }
+    public function change_price(){
+        $user_id=$this->user['id'];
+        $price=I('post.price');
+        $pro_id=I('post.pro_id');
+        if(!D('Shopping')->changeshoppingprice($user_id,$pro_id,$price)) ajax(-1,'价格修改失败',null);
+        ajax(1,'价格修改成功',null);
+    }
+    public function change_num(){
+        $user_id=$this->user['id'];
+        $num=I('post.num');
+        $pro_id=I('post.pro_id');
+        if(!D('Shopping')->changeshoppingnum($user_id,$pro_id,$num)) ajax(-1,'数量修改成功',null);
+        ajax(1,'数量修改失败',null);
+    }
     public function in(){
         if(!$_POST) return false;
         $data=I('post.data');

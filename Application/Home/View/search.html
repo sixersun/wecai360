@@ -11,7 +11,7 @@
 	<script>
 		var data=<?php echo json_encode($data);?>;
 		var search_type=<?php echo I('get.search_type');?>||1;
-
+		var role_id=<?php echo $_SESSION['user']['role'];?>;
 		$(function(){
 			$('.shopping').click(function(){
 				var dataid=$(this).attr('data-shopid');
@@ -24,15 +24,17 @@
 					}
 				},'json');
 			});
-			$('.product_list').each(function(){
-				$(this).hover(function(){
-					$(this).find('.list-btn').show();
-					$(this).find('.row_bg').show();
-				},function(){
-					$(this).find('.row_bg').hide();
-					$(this).find('.list-btn').hide();
+			if(role_id!=6){
+				$('.product_list').each(function(){
+					$(this).hover(function(){
+						$(this).find('.list-btn').show();
+						$(this).find('.row_bg').show();
+					},function(){
+						$(this).find('.row_bg').hide();
+						$(this).find('.list-btn').hide();
+					});
 				});
-			});
+			}
 			$("#search_type").val(search_type);
 		});
 	</script>
@@ -105,6 +107,7 @@
 												</if>
 											</div>
 										</div>
+
 									</div>
 									<div class="m-l-sm m-r-sm m-b-sm product_info">
 										<div class="desc-wrap pos-rlt clear">
@@ -120,6 +123,10 @@
 											<p class="m-r">库存：{$data.stock}</p>
 										</div>
 										<div class="text-darkgrey text-xs text-ellipsis" data-text="">产品参数:{$data.note}</div>
+										<if condition="$user['role'] eq 6">
+											<br/>
+											<button class="btn btn-sm orange shopping" data-shopid="{$i}" style="width:100%">加入购物车</button>
+										</if>
 									</div>
 								</div>
 							</div>
@@ -133,5 +140,7 @@
 		{$page}
 		</div>
 	</div>
+	<br/>
+	<br/>
 </body>
 </html>

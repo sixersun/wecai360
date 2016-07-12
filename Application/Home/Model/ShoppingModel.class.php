@@ -26,5 +26,13 @@ class ShoppingModel extends Model {
         $data['status']=0;
         return $this->where('id='.$id)->save($data);
     }
+    public function changeshoppingprice($user_id,$pro_id,$price){
+        $arr['price']=$price;
+        return $this->where('user_id='.$user_id.' AND pro_id='.$pro_id)->save($arr);
+    }
+    public function changeshoppingnum($user_id,$pro_id,$num){
+        $arr['pro_num']=$num;
+        return $this->where('user_id='.$user_id.' AND pro_id='.$pro_id)->save($arr);
+    }
 }
 ?>

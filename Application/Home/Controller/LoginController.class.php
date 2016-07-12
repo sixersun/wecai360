@@ -20,7 +20,21 @@ class LoginController extends Controller {
     		'password'=>I('post.password')
     		);
     	if(!$return=D('user')->checklogin($data)) $this->error('密码错误');
-    	$this->success('登录成功','/home/index',3);
+    	$this->redirect('/home/index');
+    }
+    public function guest(){
+    	$this->display('./loginguest');
+    }
+    public function guestlogin(){
+    	$tel=I('post.tel');
+    	$check=I('post.mobilecheck');
+    	if($check!=session('mobile_check')) $this->error('验证码错误');
+    	D('user')->checkguestlogin($tel);
+    	$this->redirect('/home/index');
+    }
+    public function sendcheck(){
+    	$rand=2016;
+    	session('mobile_check',$rand);
     }
 	private function check_verify($code, $id = ""){  
 	    $verify = new \Think\Verify();  

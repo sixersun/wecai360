@@ -42,23 +42,25 @@
     </div>
 
     <div class="p-a-md box-color r box-shadow-z1 text-color m-a">
-      <form name="form" action="/home/login/login" method='POST'>
+      <form name="form" action="/home/login/guestlogin" method='POST'>
         <div class="md-form-group">
           <input type="text" class="md-input" ng-model="user.name" required=""  name="tel">
+
           <label>手机号</label>
         </div>
         <div class="md-form-group">
-          <input type="password" class="md-input" ng-model="user.password" required="" name="password">
-          <label>密码</label>
+          <input type="text" class="md-input" ng-model="user.mobilecheck" required="" name="mobilecheck" style="width:130px">&nbsp;&nbsp;&nbsp;
+          <button type="button" class='btn primary btn-sm'>获取验证码</button>
+          <label>短信验证码</label>
         </div>
-        <div class="md-form-group" id="safe">
+<!--         <div class="md-form-group" id="safe">
           <input type="mobile" class="md-input" ng-model="user.mobile" required="" style="margin-top:20px" name='safecode'>
 
           <label>验证码&nbsp;&nbsp;<img src="/safecode" alt="" style="height:30px;width:auto" id="safecode" > <a href="javascript:;">看不清楚，换一个</a></label>
-        </div>
+        </div> -->
+        <br/>
         <button type="submit" class="btn primary btn-block p-x-md">登录</button>
         <br/>
-        <a href="/home/login/guest" style="text-align:center;display:block">访客登录</a>
       </form>
     </div>
   </div>
