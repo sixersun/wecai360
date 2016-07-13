@@ -47,8 +47,60 @@
 	.fa-search:hover{
 		color:#333;
 	}
+	.fr{
+		float:right;
+	}
 </style>
 <body>
+	<div class="app-header white box-shadow" style="top:0px;box-shadow:none">
+        <div class="navbar">
+        	<ul class="nav navbar-nav pull-right">
+        		<li class="nav-item dropdown pos-stc-xs"></li>
+        		<li class="nav-item dropdown">
+        			<a class="nav-link clear" href="" data-toggle="dropdown">
+        				<span class="avatar w-32">
+        					<img src="http://flatfull.com/themes/flatkit/assets/images/a0.jpg" alt="..."> 
+        					<i class="on b-white bottom"></i>
+        				</span>
+        			</a>
+        		</li>
+        	</ul>
+			<div class="collapse navbar-toggleable-sm fr" id="collapse">
+				<ul class="nav navbar-nav fr" style="margin-right:20px">
+					<li class="nav-item dropdown">
+						<a class="nav-link" href="/home/shopping" data-toggle="dropdown">
+							<span><i class="fa fa-shopping-cart"></i> 购物车</span>
+						</a>
+					</li>
+				</ul>
+				<if condition='$Think.session.user.role eq 1||$Think.session.user.role eq 2'>
+					<ul class="nav navbar-nav fr" style="margin-right:20px">
+						<li class="nav-item dropdown">
+							<a class="nav-link" href="/home/batch" data-toggle="dropdown">
+								<span><i class="fa fa-file-excel-o"></i> 导入excel</span>
+							</a>
+						</li>
+					</ul>
+				</if>
+				<if condition='$Think.session.user.role eq 1'>
+					<ul class="nav navbar-nav fr" style="margin-right:20px">
+						<li class="nav-item dropdown">
+							<a class="nav-link" href="/home/user/userlist" data-toggle="dropdown">
+								<span><i class="fa fa-users"></i> 管理用户</span>
+							</a>
+						</li>
+					</ul>
+				</if>
+				<ul class="nav navbar-nav fr" style="margin-right:20px">
+					<li class="nav-item dropdown">
+						<a class="nav-link" href="/home/user/userlist" data-toggle="dropdown">
+							<span><i class="fa fa-user"></i> {$Think.session.user.true_name}</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+        </div>
+    </div>
 	<div class='w-1000 m-t-lg'>
 		<div class='row m-b-md text-left'>
 			<div class='col-md-8 col-md-offset-2'  style="margin-top:100px">
