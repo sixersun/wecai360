@@ -88,6 +88,15 @@
 						</li>
 					</ul>
 				</if>
+				<if condition='$Think.session.user.role eq 1'>
+					<ul class="nav navbar-nav fr" style="margin-right:20px">
+						<li class="nav-item dropdown">
+							<a class="nav-link" href="/home/search/admin" data-toggle="dropdown">
+								<span><i class="fa fa-list-alt"></i> 所有商品</span>
+							</a>
+						</li>
+					</ul>
+				</if>
 			</div>
         </div>
     </div>

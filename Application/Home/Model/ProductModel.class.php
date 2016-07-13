@@ -15,6 +15,10 @@ class ProductModel extends Model {
     public function save_product($data){
     	 return $this->where('`code`="'.$data['code'].'"')->save($data);
     }
+    public function get_search_total($limit){
+        $return=$this->limit($limit)->order('id desc')->select();
+        return $return;        
+    }
     public function get_search($content,$type,$limit='0,12'){
     	switch ($type) {
     		case '1':
