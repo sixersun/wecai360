@@ -28,6 +28,7 @@ class LoginController extends Controller {
     public function guestlogin(){
     	$tel=I('post.tel');
     	$check=I('post.mobilecheck');
+        session('mobile_check',2016);
     	if($check!=session('mobile_check')) $this->error('验证码错误');
     	D('user')->checkguestlogin($tel);
     	$this->redirect('/home/index');

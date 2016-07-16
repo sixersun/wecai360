@@ -26,9 +26,13 @@
     margin-top: 90px;
 
   }
+/*  th{
+    text-align:center;
+  }*/
 </style>
 <script>
   var data=<?php echo json_encode($list);?>;
+  var sum;//总价
   $(function(){
       $('.pronum').blur(function(){
           var proprice=$(this).parents('.pro').find('.proprice').val();
@@ -43,8 +47,8 @@
               }
           },'json');
           var total=(Number(num)*Number(proprice)).toFixed(2);
-          console.log(total);
           total_price.html(total);
+          gettotal();
       });
       $('.pronum').bind('keyup', function(event) {
         if (event.keyCode == "13") {
@@ -61,6 +65,7 @@
           },'json');
           var total=(Number(num)*Number(proprice)).toFixed(2);
           total_price.html(total);
+          gettotal();
         }
       });
       $('.proprice').bind('keyup', function(event) {
@@ -77,6 +82,7 @@
               if(ret.status!=1){
                 return false;
               }
+              gettotal();
           },'json');
         }
       });
@@ -103,6 +109,8 @@
           },'json');
           var total=(Number(num)*Number(proprice)).toFixed(2);
           total_price.html(total);
+          gettotal();
+
       });
       $('.proprice').blur(function(){
           var total_price=$(this).parents('.pro').find('.total_price');
@@ -118,6 +126,8 @@
           },'json');
           total_price.html(total);
           data[p_id-1]['price']=proprice;
+          gettotal();
+
       });
       $('.export_excel').click(function(){
           //var str = data.toJSONString();
@@ -137,7 +147,9 @@
                 if(ret.status==1){
                   data_id=data_id-1;
                   delete data[data_id];
-                  pro.remove();
+                  pro.remove(); 
+                  gettotal();
+
                 }
             },'json');
         }else{
@@ -169,6 +181,16 @@
       });
       return sort;
     }
+    gettotal();
+    function gettotal(){
+       var sum=0;
+       $('.total_price').each(function(){
+            per_sum=$(this).html().replace(",","");
+            sum=Number(sum)+Number(per_sum);
+       });
+       sum=Number(sum).toFixed(2);
+       $('.totalsum').html(sum);
+    }
   });
 </script>
 <body>
@@ -190,11 +212,11 @@
               </label>
             </th>
             <th></th>
-            <th>商品名称</th>
-            <th>参考单价</th>
-            <th>实际单价</th> 
-            <th>数量</th>
-            <th>小计</th>
+            <th class="text-center">商品名称</th>
+            <th class="text-center">参考单价</th>
+            <th class="text-center">实际单价</th> 
+            <th class="text-center" >数量</th>
+            <th class="text-center">小计</th>
             <th>操作</th>
           </tr>
         </thead>
@@ -205,24 +227,24 @@
                 <label class="ui-check m-a-0"><input type="checkbox" name="post[]" class="has-value"><i class="dark-white"></i></label>
               </td>
               <td><img src="{$list.img}" alt="" style="max-height:40px;max-width:40px;overflow:hidden"></td>
-              <td>{$list.proname}</td>
-              <td>{$list.price}</td>
-              <td style="padding-top:18px">
-                  <input type="text" class="form-control proprice" data-id='{$i}' style="width:100px;" value="{$list.price}">
+              <td class="text-center">{$list.proname}</td>
+              <td class="text-center">{$list.price}</td>
+              <td style="padding-top:18px" class="text-center">
+                  <input type="text" class="form-control proprice" data-id='{$i}' style="width:100px;margin:0 auto" value="{$list.price}">
               </td>
               <td style="padding-top:18px"> 
-                <div class="input-group input-pm" style="width:100px">
+                <div class="input-group input-pm" style="width:100px;margin:0 auto">
                     <span class="input-group-btn">
                         <button class="btn btn-default pm" type="button" data-a='minus'>-</button>
                     </span>
-                    <input type="text" class="form-control pronum" placeholder="1" style="width:50px;text-align:center;border-left:none" value="{$list.pro_num}" data-id='{$i}'>
+                    <input type="text" class="form-control pronum" placeholder="1" style="width:100px;text-align:center;border-left:none" value="{$list.pro_num}" data-id='{$i}'>
                     <span class="input-group-btn">
                         <button class="btn btn-default pm" type="button" data-a='plus'>+</button>
                     </span>
                 </div><!-- /input-group -->
               </td>
               <?php $total_price=number_format($list['pro_num']*$list['price'],2) ?>
-              <td class="total_price">{$total_price}</td>
+              <td class="total_price text-center">{$total_price}</td>
               <td>
                 <a href="javascript:;" class="delete" data-id='{$i}' data-shop-id='{$list.id}' ui-toggle-class="">&nbsp;&nbsp;<i class="fa fa-times text-danger inline"></i></a>
               </td>
@@ -230,6 +252,7 @@
           </volist>
         </tbody>
       </table>
+      <p class="sum" style="text-align:right;font-size:24px;color:#ef4900;font-weight:bold;padding-right:20px">总价:<span class="totalsum">0</span></p>
     </div>
   </div>
   </div>
