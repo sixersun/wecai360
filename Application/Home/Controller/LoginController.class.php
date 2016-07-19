@@ -11,7 +11,7 @@ class LoginController extends Controller {
     public function login(){
     	$safecode=I('post.safecode');
 		if(!$this->check_verify($safecode)){  
-		    $this->error("亲，验证码输错了哦！",$this->site_url,3);  
+		    $this->error("验证码错误！",$this->site_url,3);  
 		}  
     	$tel=I('post.tel');
     	if(!is_numeric($tel)&&strlen($tel)!=11) $this->error('帐号格式错误');
