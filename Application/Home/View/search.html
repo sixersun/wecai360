@@ -42,7 +42,7 @@
 <style>
 	html,body{background:#f0f0f0}
 	.w-1200{width:1200px;margin:0 auto;}
-	.list-btn{position:absolute;bottom:0px;width:250px;margin-left:9px;display:none;z-index:9999}
+	.list-btn{position:absolute;bottom:0px;width:100%;display:none;z-index:9999}
 	.btn-group-sm>.btn, .btn-sm{
 		width:100%;
 		margin:5px 0;
@@ -64,7 +64,7 @@
 	}
 	.no-gutter:hover{border:1px solid #ff6600;border:1px solid #ff6600}
 	.row_bg{
-		width:268px;
+		width:100%;
 	    height: 100%;
 	    left: 0;
 	    top: 0;
@@ -72,29 +72,39 @@
 	    background: rgba(0, 0, 0, 0.35);
 	    z-index: 999;
 	    display:none;
-	    margin-left:15px;
+	}
+	.btn-group-sm{
+		width:90%;
+		margin:0 auto;
+	}
+	.orange{
+		display:block;
+		width:90%;
+		border-radius:3px!important;
+		margin:0 auto;
+		margin-bottom: 10px;
 	}
 </style>
-<body>
+<body class="customize-support">
 	<include file="./include-head" />
-	<div class='w-1200 white p-b-md' style="margin-top:4rem">
+	<div class='container white p-b-md' style="margin-top:4rem">
 		<div class='row m-b-md text-left'>
 			<div class='col-md-12 m-t-lg'>
 				<ul>
 					<volist name="data" id='data' offset='0'>
-					<li class="col-md-3 m-b-md product_list" style="margin:0;padding:0">
-						<a href="/product/{$data.id}" target="_blank">
-							<div class="row row-col no-gutter">
+					<li class="col-md-3 m-b-md product_list col-sm-3 col-lg-3">
+<!-- 						<a href="/product/{$data.id}" target="_blank"> -->
+							<div class="row ">
 								<div class="row_bg"></div>
 								<div class="row-col">
-									<div style="width:268px;height:268px;position:relative">
+									<div style="position:relative">
 										<if condition='$data["img"] neq ""'>
-											<img src="{$data.img}" alt="" style="width:266px;height:266px">
+											<img src="{$data.img}" alt="" style="width:100%;height:268px;">
 										<else />
 											<img src="/static/images/nopic.jpg" alt="" style="width:270px;height:270px">
 										</if>
 										<div class="list-btn">
-											<div class="btn-group btn-group-sm pull-right">
+											<div class="btn-group-sm">
 												<if condition="($user['role'] eq 1) OR ($user['role'] eq 2)">
 													<a class="btn orange" href="/log/buy/{$data['id']}">历史采购价格</a>
 												</if>
@@ -130,7 +140,7 @@
 									</div>
 								</div>
 							</div>
-						</a>
+<!-- 						</a> -->
 					</li>
 					</volist>
 				</ul>

@@ -18,7 +18,7 @@ class SearchController extends Controller {
         $count=D('Product')->get_count($content,$type);
         $Page = new \Think\Page($count, $size); // 实例化分页类 传入总记录数和每页显示的记录数(2)
         $Page->nowPage = $p;
-        $Page->setConfig('link', '/home/search?search_type'.$type.'&content='.$content.'&p=[PAGE]');
+        $Page->setConfig('link', '/home/search?search_type='.$type.'&content='.$content.'&p=[PAGE]');
         $show = $Page->show(); //分页显示输出
         $this->assign('page',$show);
     	$this->assign('user',$this->user);

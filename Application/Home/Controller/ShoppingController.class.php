@@ -114,6 +114,7 @@ class ShoppingController extends Controller {
             }
         }
         $write = new \PHPExcel_Writer_Excel5($excel);
+         $Writer = \PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
         header("Pragma: public");
         header("Expires: 0");
         header("Cache-Control:must-revalidate, post-check=0, pre-check=0");

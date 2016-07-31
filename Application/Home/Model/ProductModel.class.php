@@ -82,6 +82,15 @@ class ProductModel extends Model {
             return  $this->save_product($_data);
         }
         return $this->add($_data);
-    }	
+    }
+    public function get_cat_search($cat,$limit){
+        $return=$this->where('cat='.$cat)->order('id desc')->limit($limit)->select();
+        return $return;
+    }
+    public function get_cat_count($cat){
+        $count=$this->where('cat='.$cat)->order('id asc')->count();
+        return $count;
+    }
+
 }
 ?>
